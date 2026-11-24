@@ -13,7 +13,7 @@
 | `outputs/reports/` | 每轮任务的离线 HTML 汇报。 |
 | `reference/` | 外部资料与参考笔记。空目录可在克隆后用 `mkdir -p reference` 补齐。 |
 | `skills/` | 项目自带的 [project-manager 技能](skills/project-manager/SKILL.md)。 |
-| `verify_antigravity_routing.py` | 在隔离 Mihomo 实例中验证 Antigravity 路由的脚本入口。 |
+| `src/` | 存放可复用的校验与辅助脚本，当前入口为 [verify_antigravity_routing.py](src/verify_antigravity_routing.py)。 |
 | `geoip.metadb` | 本地 GeoIP 数据，供 Mihomo 配置校验使用。 |
 
 ## 策略组方案
@@ -27,8 +27,8 @@
 从项目根目录运行。脚本需要 Python 3、PyYAML、`/usr/bin/verge-mihomo`，完整校验还会使用本机 Antigravity 和网络连接。
 
 ```bash
-python3 verify_antigravity_routing.py
-python3 verify_antigravity_routing.py version/双订阅分流-v2.yaml
+python3 src/verify_antigravity_routing.py
+python3 src/verify_antigravity_routing.py version/双订阅分流-v2.yaml
 ```
 
 两份方案均通过 Mihomo 数据目录下的 `profiles/` 读取订阅。克隆后，从 Clash Verge 导出对应订阅，按方案中的 provider 路径放回。若本机有备份，`data/subscriptions/飞鸟云.yaml` 对应 `profiles/RTDoapXPR1dR.yaml`，`data/subscriptions/喵子.yaml` 对应 `profiles/RQFkMMru5OhB.yaml`。可从本机 Mihomo 数据目录补齐该版本使用的 GeoIP 文件。订阅原件和 GeoIP 数据只保存在本机，未线上备份。

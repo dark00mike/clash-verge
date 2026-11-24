@@ -4,7 +4,7 @@ End-to-end isolated verification script for Clash Verge / Mihomo Antigravity US 
 Zero side-effects on the running system Clash Verge service (uses isolated temp ports & no TUN).
 
 Usage:
-    python3 verify_antigravity_routing.py [yaml_file]
+    python3 src/verify_antigravity_routing.py [yaml_file]
 Default yaml_file: version/双订阅分流-v2.yaml
 """
 
@@ -23,7 +23,7 @@ import urllib.parse
 import urllib.request
 import yaml
 
-WORKSPACE = os.path.dirname(os.path.abspath(__file__))
+WORKSPACE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 MIHOMO_BIN = "/usr/bin/verge-mihomo"
 AGY_NODE_BIN = "/home/mike/.config/Antigravity/bin/agy-node"
 MIXED_PORT = 28797
