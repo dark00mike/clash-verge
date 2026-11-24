@@ -1,0 +1,4 @@
+interface:
+  display_name: "Project Manager"
+  short_description: "精简项目结构，保存讨论与HTML汇报、Git版本，按请求手动清理临时文件"
+  default_prompt: "请使用 $project-manager 为当前项目建立或维护目录、沟通记录、HTML汇报和Git版本；临时文件按我的请求手动清理。"
