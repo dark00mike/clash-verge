@@ -18,8 +18,9 @@
 
 ## 策略组方案
 
-- [双订阅分流 v2](version/双订阅分流-v2.yaml)是校验脚本的默认方案，包含 Antigravity 美国节点自动选择和故障转移。
-- [双订阅分流 v1](version/双订阅分流.yaml)供对照，部分进程路径规则使用本机路径。
+- [双订阅分流 v3](version/双订阅分流-v3.yaml)是校验脚本的当前默认方案：在 v2 基础上针对 Antigravity SSE 长连接 `unexpected EOF` 与地区拦截做了稳态加固（默认粘性主备 `Antigravity 美国稳态主备`、排除 Cloudflare 中转 `🇺🇸 美国 🄲` 出自动/主备池、直测 `daily-cloudcode-pa.googleapis.com`、开启 15s TCP keep-alive、并在保护 `youtubei.googleapis.com` 的前提下以 `googleapis.com` 全量兜底）。
+- [双订阅分流 v2](version/双订阅分流-v2.yaml)保留对照（双订阅美国 `url-test` + `sniffer` 方案）。
+- [双订阅分流 v1](version/双订阅分流.yaml)保留对照，部分进程路径规则使用本机路径。
 - 日常方案修改通过 Git 提交保存，正式冻结使用 Git 标签。
 
 ## 本机校验
@@ -28,7 +29,7 @@
 
 ```bash
 python3 src/verify_antigravity_routing.py
-python3 src/verify_antigravity_routing.py version/双订阅分流-v2.yaml
+python3 src/verify_antigravity_routing.py version/双订阅分流-v3.yaml
 ```
 
 两份方案均通过 Mihomo 数据目录下的 `profiles/` 读取订阅。克隆后，从 Clash Verge 导出对应订阅，按方案中的 provider 路径放回。若本机有备份，`data/subscriptions/飞鸟云.yaml` 对应 `profiles/RTDoapXPR1dR.yaml`，`data/subscriptions/喵子.yaml` 对应 `profiles/RQFkMMru5OhB.yaml`。可从本机 Mihomo 数据目录补齐该版本使用的 GeoIP 文件。订阅原件和 GeoIP 数据只保存在本机，未线上备份。
